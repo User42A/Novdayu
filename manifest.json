@@ -1,0 +1,9 @@
+{
+  "name": "Nova Day",
+  "short_name": "NovaDay",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#041022",
+  "theme_color": "#08142f",
+  "description": "Daily app im iPhone Glass Stil mit Training, Routine und Kalender."
+}

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#08142f" />
+  <title>Nova Day</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="wallpaper"></div>
+  <div class="wallpaper glow-1"></div>
+  <div class="wallpaper glow-2"></div>
+
+  <div class="phone-shell">
+    <aside class="side-panel" id="sidePanel">
+      <div class="panel-card glass">
+        <div class="mac-dots">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+        </div>
+
+        <div class="panel-brand">
+          <p class="panel-label">DAILY SYSTEM</p>
+          <h2>Nova Day</h2>
+        </div>
+
+        <div class="panel-profile">
+          <div class="avatar">🦇</div>
+          <div>
+            <strong>Mr. Batman</strong>
+            <p>Welcome</p>
+          </div>
+        </div>
+
+        <nav class="panel-menu">
+          <button type="button" class="menu-item active" data-section="dashboard"><span>◈</span><span>Dashboard</span></button>
+          <button type="button" class="menu-item" data-section="training"><span>⬢</span><span>Training</span></button>
+          <button type="button" class="menu-item" data-section="routine"><span>◌</span><span>Routine</span></button>
+          <button type="button" class="menu-item" data-section="calendar"><span>▦</span><span>Kalender</span></button>
+          <button type="button" class="menu-item" data-section="habits"><span>◎</span><span>Habits</span></button>
+          <button type="button" class="menu-item" data-section="meals"><span>◔</span><span>Mahlzeiten</span></button>
+          <button type="button" class="menu-item" data-section="recipes"><span>◑</span><span>Rezepte</span></button>
+          <button type="button" class="menu-item" data-section="supplements"><span>✦</span><span>Supplements</span></button>
+          <button type="button" class="menu-item" data-section="schedule"><span>▣</span><span>Plan</span></button>
+          <button type="button" class="menu-item" data-section="checklist"><span>✓</span><span>Checkliste</span></button>
+        </nav>
+      </div>
+    </aside>
+
+    <main class="app glass">
+      <div class="status-space"></div>
+
+      <header class="topbar">
+        <button type="button" class="circle-btn" id="menuBtn" aria-label="Menü öffnen">☰</button>
+        <div class="topbar-copy">
+          <p class="eyebrow">Today</p>
+          <h1 id="screenTitle">Dashboard</h1>
+        </div>
+        <button type="button" class="circle-btn" id="resetBtn" aria-label="Alles zurücksetzen">↺</button>
+      </header>
+
+      <div class="scroll-area">
+        <section class="hero glass-soft" id="heroCard">
+          <div class="hero-copy">
+            <span class="hero-pill">iPhone Daily UI</span>
+            <h3>Alles für deinen Tag</h3>
+            <p>Dashboard, Training, Routine, Kalender und dein Daily-System in einem Look.</p>
+          </div>
+          <div class="progress-wrap">
+            <svg viewBox="0 0 120 120" class="ring">
+              <circle class="ring-track" cx="60" cy="60" r="48"></circle>
+              <circle class="ring-progress" cx="60" cy="60" r="48"></circle>
+            </svg>
+            <div class="ring-center">
+              <strong id="progressText">0%</strong>
+              <span>done</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="screen visible" data-screen="dashboard">
+          <div class="stats-grid">
+            <article class="mini-card glass-soft"><span>Heute Training</span><strong id="todayTrainingName">Push Day</strong></article>
+            <article class="mini-card glass-soft"><span>Workout Progress</span><strong id="todayTrainingProgress">0%</strong></article>
+            <article class="mini-card glass-soft"><span>Routine</span><strong id="routineCount">0</strong></article>
+            <article class="mini-card glass-soft"><span>Kalender</span><strong id="calendarCount">0</strong></article>
+          </div>
+
+          <div class="dashboard-block glass-soft">
+            <div class="dashboard-row">
+              <div>
+                <p class="small-label">HEUTE TRAINIERST DU</p>
+                <h3 id="dashboardWorkoutTitle">Push Day</h3>
+                <p id="dashboardWorkoutMeta" class="muted-copy">3 Übungen · 0/3 erledigt</p>
+              </div>
+              <div class="small-progress">
+                <svg viewBox="0 0 90 90" class="mini-ring">
+                  <circle class="mini-track" cx="45" cy="45" r="34"></circle>
+                  <circle class="mini-bar" cx="45" cy="45" r="34"></circle>
+                </svg>
+                <div class="mini-center" id="dashboardWorkoutPercent">0%</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="screen" data-screen="training">
+          <div class="section-head">
+            <h3>Workout Planner</h3>
+            <button type="button" class="add-btn" id="addTrainingDayBtn">+ Add day</button>
+          </div>
+
+          <div class="training-days" id="trainingDays"></div>
+
+          <div class="training-panel glass-soft">
+            <div class="training-panel-head">
+              <div>
+                <p class="small-label">TRAINING DAY</p>
+                <h3 id="activeTrainingDayTitle">Day 1</h3>
+              </div>
+              <div class="training-progress-text" id="activeTrainingDayProgressText">0/0 completed</div>
+            </div>
+
+            <div class="training-exercise-list" id="trainingExerciseList"></div>
+
+            <button type="button" class="add-exercise-btn" id="addExerciseBtn">+ Add Exercise</button>
+          </div>
+        </section>
+
+        <section class="screen" data-screen="routine">
+          <div class="section-head">
+            <h3>Routine</h3>
+            <button type="button" class="add-btn" data-type="routine">+ Routine</button>
+          </div>
+          <div class="list" id="routineList"></div>
+        </section>
+
+        <section class="screen" data-screen="calendar">
+          <div class="section-head">
+            <h3>Kalender</h3>
+            <button type="button" class="add-btn" data-type="calendar">+ Termin</button>
+          </div>
+          <div class="calendar-head glass-soft">
+            <button type="button" class="month-btn" id="prevMonth">‹</button>
+            <div class="month-title" id="monthTitle">Monat</div>
+            <button type="button" class="month-btn" id="nextMonth">›</button>
+          </div>
+          <div class="weekdays">
+            <span>Mo</span><span>Di</span><span>Mi</span><span>Do</span><span>Fr</span><span>Sa</span><span>So</span>
+          </div>
+          <div class="calendar-grid" id="calendarGrid"></div>
+          <div class="section-subhead">
+            <h4>Termine am ausgewählten Tag</h4>
+          </div>
+          <div class="list" id="calendarEventList"></div>
+        </section>
+
+        <section class="screen" data-screen="habits">
+          <div class="section-head">
+            <h3>Habits</h3>
+            <button type="button" class="add-btn" data-type="habits">+ Habit</button>
+          </div>
+          <div class="list" id="habitsList"></div>
+        </section>
+
+        <section class="screen" data-screen="meals">
+          <div class="section-head">
+            <h3>Mahlzeiten</h3>
+            <button type="button" class="add-btn" data-type="meals">+ Mahlzeit</button>
+          </div>
+          <div class="list" id="mealsList"></div>
+        </section>
+
+        <section class="screen" data-screen="recipes">
+          <div class="section-head">
+            <div>
+              <h3>Rezepte</h3>
+              <p class="muted-copy recipes-copy">Eigene Rezepte nach Kategorie speichern.</p>
+            </div>
+            <button type="button" class="add-btn" id="addRecipeBtn">+ Rezept</button>
+          </div>
+
+          <div class="recipe-categories" id="recipeCategories"></div>
+          <div class="recipe-subhead glass-soft">
+            <div>
+              <p class="small-label">KATEGORIE</p>
+              <h3 id="activeRecipeCategoryTitle">Frühstück</h3>
+            </div>
+            <span class="pill" id="recipeCountPill">0 Rezepte</span>
+          </div>
+          <div class="list recipe-list" id="recipesList"></div>
+        </section>
+
+        <section class="screen" data-screen="supplements">
+          <div class="section-head">
+            <h3>Supplements</h3>
+            <button type="button" class="add-btn" data-type="supplements">+ Supplement</button>
+          </div>
+          <div class="list" id="supplementsList"></div>
+        </section>
+
+        <section class="screen" data-screen="schedule">
+          <div class="section-head">
+            <h3>Tagesplan</h3>
+            <button type="button" class="add-btn" data-type="schedule">+ Slot</button>
+          </div>
+          <div class="list" id="scheduleList"></div>
+        </section>
+
+        <section class="screen" data-screen="checklist">
+          <div class="section-head">
+            <h3>Checkliste</h3>
+            <button type="button" class="add-btn" data-type="checklist">+ Punkt</button>
+          </div>
+          <div class="list" id="checklistList"></div>
+        </section>
+      </div>
+
+      <nav class="bottom-nav glass-soft">
+        <button type="button" class="bottom-item active" data-section="dashboard">Home</button>
+        <button type="button" class="bottom-item" data-section="training">Training</button>
+        <button type="button" class="bottom-item" data-section="calendar">Kalender</button>
+        <button type="button" class="bottom-item" data-section="habits">Habits</button>
+      </nav>
+    </main>
+  </div>
+
+  <div class="backdrop hidden" id="backdrop"></div>
+
+  <div class="modal hidden" id="modal">
+    <div class="modal-card glass">
+      <div class="modal-top">
+        <h3 id="modalTitle">Eintrag hinzufügen</h3>
+        <button type="button" class="circle-btn small" id="closeModal">✕</button>
+      </div>
+      <form id="entryForm">
+        <label>
+          <span>Titel</span>
+          <input id="fieldTitle" name="title" placeholder="Titel" required />
+        </label>
+        <label>
+          <span>Zeit</span>
+          <input id="fieldTime" name="time" placeholder="z. B. 18:00" />
+        </label>
+        <label id="dateLabel" class="hidden">
+          <span>Datum</span>
+          <input id="fieldDate" name="date" type="date" />
+        </label>
+        <label>
+          <span>Notiz</span>
+          <textarea id="fieldNote" name="note" placeholder="Mehr Infos"></textarea>
+        </label>
+        <div class="form-actions">
+          <button type="button" class="form-btn" id="cancelBtn">Abbrechen</button>
+          <button type="submit" class="form-btn">Speichern</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal hidden" id="trainingModal">
+    <div class="modal-card glass">
+      <div class="modal-top">
+        <h3 id="trainingModalTitle">Exercise hinzufügen</h3>
+        <button type="button" class="circle-btn small" id="closeTrainingModal">✕</button>
+      </div>
+      <form id="trainingForm">
+        <label>
+          <span>Übung</span>
+          <input id="exerciseName" placeholder="z. B. Rücken" required />
+        </label>
+        <label>
+          <span>Gewicht (kg)</span>
+          <input id="exerciseWeight" type="number" min="0" placeholder="0" />
+        </label>
+        <label>
+          <span>Sätze</span>
+          <input id="exerciseSets" type="number" min="0" placeholder="0" />
+        </label>
+        <label>
+          <span>Wiederholungen</span>
+          <input id="exerciseReps" type="number" min="0" placeholder="0" />
+        </label>
+        <label>
+          <span>Notizen</span>
+          <textarea id="exerciseNotes" placeholder="Mehr Infos"></textarea>
+        </label>
+        <div class="form-actions">
+          <button type="button" class="form-btn" id="cancelTrainingBtn">Abbrechen</button>
+          <button type="submit" class="form-btn">Speichern</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal hidden" id="recipeModal">
+    <div class="modal-card glass recipe-modal-card">
+      <div class="modal-top">
+        <h3 id="recipeModalTitle">Rezept hinzufügen</h3>
+        <button type="button" class="circle-btn small" id="closeRecipeModal">✕</button>
+      </div>
+      <form id="recipeForm">
+        <label>
+          <span>Kategorie</span>
+          <select id="recipeCategory" required></select>
+        </label>
+        <label>
+          <span>Name</span>
+          <input id="recipeName" placeholder="z. B. Chicken Rice Bowl" required />
+        </label>
+        <div class="recipe-macro-grid">
+          <label>
+            <span>Kalorien</span>
+            <input id="recipeCalories" type="number" min="0" step="1" placeholder="0" />
+          </label>
+          <label>
+            <span>Protein (g)</span>
+            <input id="recipeProtein" type="number" min="0" step="0.1" placeholder="0" />
+          </label>
+          <label>
+            <span>Carbs (g)</span>
+            <input id="recipeCarbs" type="number" min="0" step="0.1" placeholder="0" />
+          </label>
+          <label>
+            <span>Fett (g)</span>
+            <input id="recipeFat" type="number" min="0" step="0.1" placeholder="0" />
+          </label>
+        </div>
+        <label>
+          <span>Zutaten</span>
+          <textarea id="recipeIngredients" placeholder="Jede Zutat in eine neue Zeile"></textarea>
+        </label>
+        <label>
+          <span>Zubereitung</span>
+          <textarea id="recipePreparation" placeholder="Schritte oder Beschreibung"></textarea>
+        </label>
+        <div class="form-actions">
+          <button type="button" class="form-btn" id="cancelRecipeBtn">Abbrechen</button>
+          <button type="submit" class="form-btn">Speichern</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
